@@ -1,0 +1,15 @@
+#include <iostream>
+#include <string>
+#include <functional>  // For std::hash
+
+int main() {
+    std::string input = "hello";
+
+    
+    std::hash<std::string> hashFunction;
+    size_t hashValue = hashFunction(input);
+
+    std::cout << "Hash value of '" << input << "' is: " << hashValue << std::endl;
+
+    return 0;
+}
