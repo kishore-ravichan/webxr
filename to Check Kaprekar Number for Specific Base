@@ -1,0 +1,44 @@
+#include <cmath>
+#include <string>
+
+bool isKaprekar(int num, int base) {
+    if (num == 0) return false; // 0 is not a Kaprekar number
+
+    
+    long long square = static_cast<long long>(num) * num;
+
+    
+    std::string squareBase;
+    while (square > 0) {
+        squareBase = std::to_string(square % base) + squareBase;
+        square /= base;
+    }
+
+    
+    int len = squareBase.length();
+    std::string leftPart = (len > 1) ? squareBase.substr(0, len - 1) : "0";
+    std::string rightPart = squareBase.substr(len - 1);
+
+   
+    long long leftNum = std::stoll(leftPart, nullptr, base);
+    long long rightNum = std::stoll(rightPart, nullptr, base);
+
+    
+    return (leftNum + rightNum == num);
+}
+
+int main() {
+    int number, base;
+    std::cout << "Enter a number: ";
+    std::cin >> number;
+    std::cout << "Enter the base: ";
+    std::cin >> base;
+
+    if (isKaprekar(number, base)) {
+        std::cout << number << " is a Kaprekar number in base " << base << ".\n";
+    } else {
+        std::cout << number << " is not a Kaprekar number in base " << base << ".\n";
+    }
+
+    return 0;
+}
